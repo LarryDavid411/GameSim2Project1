@@ -6,13 +6,15 @@ using UnityEngine;
 public class KillerFogAttributes : MonoBehaviour
 {
     public bool fogTriggered;
+
+    public GameObject fsmManager;
     //
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            
+            fsmManager.GetComponent<FSMController>().state = FSMController.State.KilledByFog;
         }
     }
 

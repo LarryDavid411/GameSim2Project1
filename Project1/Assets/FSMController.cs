@@ -26,12 +26,14 @@ public class FSMController : MonoBehaviour
     public State state;
     public FogState fogState;
     public bool playerAttacking;
+    public bool playerAlive;
 
     // Start is called before the first frame update
     void Start()
     {
         state = State.Idle;
         fogState = FogState.Idle;
+        playerAlive = true;
     }
 
 
@@ -142,15 +144,22 @@ public class FSMController : MonoBehaviour
 
             case State.KilledByFog:
             {
-                
+                playerAlive = false;
+                player.GetComponent<Animator>().SetBool("isWalking", false);
+                player.GetComponent<Animator>().SetBool("isAttacking", false);
+                player.GetComponent<Animator>().SetBool("isDead", true);
             }
                 break;
         }
         
         
         // move player controller
-        CharacterController c = player.GetComponent<CharacterController>();
-        c.Move(moveDir * Time.deltaTime);
+        if (playerAlive)
+        {
+            CharacterController c = player.GetComponent<CharacterController>();
+            c.Move(moveDir * Time.deltaTime);
+        }
+       
     }
 
     public void MoveFog()
