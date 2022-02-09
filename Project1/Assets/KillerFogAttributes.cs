@@ -1,11 +1,21 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class KillerFogAttributes : MonoBehaviour
 {
+    public bool fogTriggered;
+    //
 
-    public GameObject fsmManager;
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +25,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        fsmManager.GetComponent<FSMController>().MovePlayer();
-        fsmManager.GetComponent<FSMController>().MoveFog();
+        
     }
 }

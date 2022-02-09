@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class PlayerAttributes : MonoBehaviour
 {
-
-    public GameObject fsmManager;
+    public int playerHealth;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,7 +14,6 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        fsmManager.GetComponent<FSMController>().MovePlayer();
-        fsmManager.GetComponent<FSMController>().MoveFog();
+        
     }
 }

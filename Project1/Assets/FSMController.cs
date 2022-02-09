@@ -6,23 +6,32 @@ public class FSMController : MonoBehaviour
 {
 
     public GameObject player;
-    
+    public GameObject fog;
+
     public enum State
     {
         Idle,
         Walking,
         Attacking,
         AttackingWhileWalking,
-        ActivelyMoving
+        ActivelyMoving,
+        KilledByFog
     }
 
+    public enum FogState
+    {
+        Idle,
+        Approaching
+    }
     public State state;
+    public FogState fogState;
     public bool playerAttacking;
 
     // Start is called before the first frame update
     void Start()
     {
         state = State.Idle;
+        fogState = FogState.Idle;
     }
 
 
@@ -130,6 +139,12 @@ public class FSMController : MonoBehaviour
                 moveDir.y = moveY;
             }
                 break;
+
+            case State.KilledByFog:
+            {
+                
+            }
+                break;
         }
         
         
@@ -137,6 +152,28 @@ public class FSMController : MonoBehaviour
         CharacterController c = player.GetComponent<CharacterController>();
         c.Move(moveDir * Time.deltaTime);
     }
+
+    public void MoveFog()
+    {
+        switch (fogState)
+        {
+            case FogState.Idle:
+            {
+                if (fog.GetComponent<KillerFogAttributes>().fogTriggered)
+                {
+                    fogState = FogState.Approaching;
+                }
+            }
+                break;
+            case FogState.Approaching:
+            {
+                // fog advancing movement
+                fog.GetComponent<Transform>().position += (Vector3.right * Time.deltaTime);
+            }
+                break;
+        }
+    }
+    
     // Update is called once per frame
     void Update()
     {
