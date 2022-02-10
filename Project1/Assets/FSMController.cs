@@ -147,7 +147,8 @@ public class FSMController : MonoBehaviour
                 playerAlive = false;
                 player.GetComponent<Animator>().SetBool("isWalking", false);
                 player.GetComponent<Animator>().SetBool("isAttacking", false);
-                player.GetComponent<Animator>().SetBool("isDead", true);
+                player.GetComponent<Animator>().SetTrigger("isDead");
+                    
             }
                 break;
         }
