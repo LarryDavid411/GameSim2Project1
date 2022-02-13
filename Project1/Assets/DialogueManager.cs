@@ -7,6 +7,7 @@ public class DialogueManager : MonoBehaviour
 {
     //public GameObject gameManager;
     private float textTimerForLetters;
+    public GameObject levelSelector;
 
     public int currentLevel; 
     private int displayTextSequence;
@@ -46,7 +47,6 @@ public class DialogueManager : MonoBehaviour
         nameTextAdded = "";
         displayTextSequence = -1;
         startGameTextString = "Start Game";
-        
     }
 
     // Update is called once per frame
@@ -98,33 +98,12 @@ public class DialogueManager : MonoBehaviour
                 case MenuState.DisplayAll:
                 {
                     displayTextStartButton.text = startGameTextString;
-                    
-                    
-                    
+                    levelSelector.SetActive(true);
                 } break;
                 
             }
             
             displayText.text = nameTextAdded;
-            
-            // if (delayStartTimer < delayStart)
-            // {
-            //     
-            // }
-            // if ( startTitle && (displayTextSequence < nameText.Length - 1))
-            // {
-            //     
-            // }
-            // else
-            // {
-            //     titleOverTimer += Time.deltaTime;
-            //     if (titleOverTimer > titleOverTimeSet)
-            //     {
-            //         titleOver = true;
-            //     }
-            //     Debug.Log("titleOver");
-            // }
-            
         }
     }
 }
