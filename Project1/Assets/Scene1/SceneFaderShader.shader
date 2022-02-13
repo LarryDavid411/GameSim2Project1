@@ -1,4 +1,4 @@
-Shader "Unlit/Color"
+Shader "Unlit/SceneFader"
 {
    Properties
     {
@@ -6,8 +6,8 @@ Shader "Unlit/Color"
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
-
+        Tags {"Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent"}
+        
         Pass
         {
             CGPROGRAM
@@ -39,13 +39,12 @@ Shader "Unlit/Color"
             Interpolators vert (MeshData v)
             {
                 Interpolators o;
-                o.vertex = UnityObjectToClipPos(v.vertex);
+                o.vertex = UnityObjectToClipPos(v.vertex) ;
                 return o;
             }
 
             fixed4 frag (Interpolators i) : SV_Target
             {
-                
                 return _Color;
             }
             ENDCG
