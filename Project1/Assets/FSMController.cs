@@ -27,6 +27,7 @@ public class FSMController : MonoBehaviour
     public FogState fogState;
     public bool playerAttacking;
     public bool playerAlive;
+    public Vector2 playerSpeed;
 
     // Start is called before the first frame update
     void Start()
@@ -91,8 +92,8 @@ public class FSMController : MonoBehaviour
                 }
                 
                 // set to move player
-                moveDir.x = moveX;
-                moveDir.y = moveY;
+                moveDir.x = moveX * playerSpeed.x;
+                moveDir.y = moveY * playerSpeed.y;
             }
                 break;
 
@@ -137,8 +138,8 @@ public class FSMController : MonoBehaviour
                     player.GetComponent<SpriteRenderer>().flipX = false;
                 }
                 // set to move player
-                moveDir.x = moveX;
-                moveDir.y = moveY;
+                moveDir.x = moveX * playerSpeed.x;
+                moveDir.y = moveY * playerSpeed.y;
             }
                 break;
 
