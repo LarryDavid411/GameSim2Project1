@@ -5,7 +5,7 @@ using  UnityEngine.UI;
 
 public class SceneManager1 : MonoBehaviour
 {
-    
+    public GameObject fsmManager;
     
     public enum DisplayState
     {
@@ -29,7 +29,7 @@ public class SceneManager1 : MonoBehaviour
         {
             case DisplayState.start:
             {   
-                
+                // TODO: Set up transition start
             } break;
 
             case DisplayState.playing:
@@ -39,7 +39,8 @@ public class SceneManager1 : MonoBehaviour
 
             case DisplayState.end:
             {
-                
+                // TODO: Set up transition end
+                fsmManager.GetComponent<FSMController>().state = FSMController.State.ActivelyMoving;
             } break;
             
         }
