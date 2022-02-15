@@ -6,11 +6,13 @@ using UnityEngine;
 public class BrickAttack : MonoBehaviour
 {
     public GameObject player;
+    public GameObject dialogue;
     public GameObject fsmManager;
     public bool attackFromLeft;
     public bool attackingBrick;
     private void OnTriggerStay(Collider other)
     {
+        
         if (other.tag == "PlayerAttackObject")
         {
             if (attackFromLeft != player.GetComponent<SpriteRenderer>().flipX )
@@ -32,6 +34,28 @@ public class BrickAttack : MonoBehaviour
             else
             {
                 gameObject.transform.parent.GetComponent<BrickAttributes>().brickBeingAttacked = false;
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            if (gameObject.transform.parent.GetComponent<BrickAttributes>().introBrick)
+            {
+                dialogue.GetComponent<DialogueObjects>().displayIntroBrickText = true;
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            if (gameObject.transform.parent.GetComponent<BrickAttributes>().introBrick)
+            {
+                dialogue.GetComponent<DialogueObjects>().displayIntroBrickText = false;
             }
         }
     }
