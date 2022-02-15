@@ -97,7 +97,6 @@ public class FSMController : MonoBehaviour
             }
                 break;
 
-
             case State.Attacking:
             {
                 player.GetComponent<Animator>().SetBool("isAttacking", true);
@@ -150,8 +149,15 @@ public class FSMController : MonoBehaviour
                 player.GetComponent<Animator>().SetBool("isAttacking", false);
                 player.GetComponent<Animator>().SetTrigger("isDead");
                     
-            }
-                break;
+            } break;
+
+            case State.ActivelyMoving:
+            {
+                player.GetComponent<Animator>().SetBool("isAttacking", false);
+                player.GetComponent<Animator>().SetBool("isWalking", true);
+                moveDir.y = 0;
+                moveDir.x = 3;
+            } break;
         }
         
         
