@@ -5,14 +5,15 @@ using UnityEngine;
 
 public class BrickAttack : MonoBehaviour
 {
+    public GameObject player;
     public GameObject fsmManager;
     public bool attackFromLeft;
     public bool attackingBrick;
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Player")
+        if (other.tag == "PlayerAttackObject")
         {
-            if (attackFromLeft != other.GetComponent<SpriteRenderer>().flipX )
+            if (attackFromLeft != player.GetComponent<SpriteRenderer>().flipX )
             {
                 attackingBrick = true;
             }

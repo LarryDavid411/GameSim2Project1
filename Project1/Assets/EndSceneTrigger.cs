@@ -10,7 +10,7 @@ public class EndSceneTrigger : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            sceneManager.AddComponent<SceneManager1>()._displayState = SceneManager1.DisplayState.end;
+            sceneManager.GetComponent<SceneManager1>()._displayState = SceneManager1.DisplayState.end;
         }
     }
 }
