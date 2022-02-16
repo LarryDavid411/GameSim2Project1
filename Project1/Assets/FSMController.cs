@@ -173,7 +173,11 @@ public class FSMController : MonoBehaviour
 
             case State.PushingWhileIdle:
             {
-                   
+                //player.GetComponent<Animator>().
+                if (moveX > 0)
+                {
+                    state = State.PushingWhileWalking;
+                }
             } break;
 
             case State.PushingWhileWalking:

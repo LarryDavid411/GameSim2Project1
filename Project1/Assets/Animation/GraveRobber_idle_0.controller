@@ -183,7 +183,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: PlayerPush
+  m_Name: PlayerPushWalking
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions:
@@ -388,16 +388,16 @@ AnimatorStateMachine:
     m_Position: {x: 10, y: 240, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 1564491036948150651}
-    m_Position: {x: 310, y: 350, z: 0}
+    m_Position: {x: 430, y: 370, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -3008683276029631052}
-    m_Position: {x: -260, y: 350, z: 0}
+    m_Position: {x: -440, y: 380, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -1828158929997331073}
     m_Position: {x: 380, y: 510, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2616410747306000077}
-    m_Position: {x: 10, y: 350, z: 0}
+    m_Position: {x: -120, y: 380, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: -7897631568457918645}
