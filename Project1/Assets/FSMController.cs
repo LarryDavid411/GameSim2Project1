@@ -15,7 +15,8 @@ public class FSMController : MonoBehaviour
         Attacking,
         AttackingWhileWalking,
         ActivelyMoving,
-        KilledByFog
+        KilledByFog,
+        Pushing
     }
 
     public enum FogState
@@ -157,6 +158,11 @@ public class FSMController : MonoBehaviour
                 player.GetComponent<Animator>().SetBool("isWalking", true);
                 moveDir.y = 0;
                 moveDir.x = 3;
+            } break;
+
+            case State.Pushing:
+            {
+                   
             } break;
         }
         
