@@ -16,7 +16,8 @@ public class FSMController : MonoBehaviour
         AttackingWhileWalking,
         ActivelyMoving,
         KilledByFog,
-        Pushing
+        PushingWhileWalking,
+        PushingWhileIdle
     }
 
     public enum FogState
@@ -66,6 +67,10 @@ public class FSMController : MonoBehaviour
                 {
                     player.GetComponent<Animator>().SetBool("isAttacking", false);
                 }
+                if (playerInPushTrigger && Input.GetKeyDown(KeyCode.E))
+                {
+                    state = State.PushingWhileIdle;
+                }
             }
                 break;
 
@@ -93,10 +98,10 @@ public class FSMController : MonoBehaviour
                     state = State.AttackingWhileWalking;
                 }
 
-                // if (playerInPushTrigger &&)
-                // {
-                //     state = State.Pushing;
-                // }
+                if (playerInPushTrigger && Input.GetKeyDown(KeyCode.E))
+                {
+                    state = State.PushingWhileWalking;
+                }
                 
                 // set to move player
                 moveDir.x = moveX * playerSpeed.x;
@@ -166,9 +171,14 @@ public class FSMController : MonoBehaviour
                 moveDir.x = 3;
             } break;
 
-            case State.Pushing:
+            case State.PushingWhileIdle:
             {
                    
+            } break;
+
+            case State.PushingWhileWalking:
+            {
+                
             } break;
         }
         
