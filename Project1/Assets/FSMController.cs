@@ -29,6 +29,7 @@ public class FSMController : MonoBehaviour
     public bool playerAttacking;
     public bool playerAlive;
     public Vector2 playerSpeed;
+    public bool playerInPushTrigger;
 
     // Start is called before the first frame update
     void Start()
@@ -91,6 +92,11 @@ public class FSMController : MonoBehaviour
                 {
                     state = State.AttackingWhileWalking;
                 }
+
+                // if (playerInPushTrigger &&)
+                // {
+                //     state = State.Pushing;
+                // }
                 
                 // set to move player
                 moveDir.x = moveX * playerSpeed.x;
