@@ -15,8 +15,10 @@ public class BrickAttack : MonoBehaviour
         
         if (other.tag == "PlayerAttackObject")
         {
+            
             if (attackFromLeft != player.GetComponent<SpriteRenderer>().flipX )
             {
+                fsmManager.GetComponent<FSMController>().inAttackSpace = true;
                 attackingBrick = true;
             }
             else
@@ -53,6 +55,7 @@ public class BrickAttack : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            fsmManager.GetComponent<FSMController>().inAttackSpace = false;
             if (gameObject.transform.parent.GetComponent<BrickAttributes>().introBrick)
             {
                 dialogue.GetComponent<DialogueObjects>().displayIntroBrickText = false;

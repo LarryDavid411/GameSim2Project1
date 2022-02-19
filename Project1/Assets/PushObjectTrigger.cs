@@ -14,8 +14,10 @@ public class PushObjectTrigger : MonoBehaviour
     {
         if (other.tag == "PushObjectPlayerTag")
         {
+            
             if (pushFromLeft != player.GetComponent<SpriteRenderer>().flipX)
             {
+                fsmManager.GetComponent<FSMController>().playerInPushTrigger = true;
                 pushingBrick = true;
             }
             else
@@ -32,6 +34,11 @@ public class PushObjectTrigger : MonoBehaviour
         
         
         
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        fsmManager.GetComponent<FSMController>().playerInPushTrigger = false;
     }
 
     // Start is called before the first frame update

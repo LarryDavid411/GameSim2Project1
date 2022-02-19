@@ -38,11 +38,11 @@ public class DialogueObjects : MonoBehaviour
 
         if (displayPushBrickText)
         {
-            textIntroPushObject.gameObject.SetActive(false);
+            textIntroPushObject.gameObject.SetActive(true);
         }
         else
         {
-            textIntroPushObject.gameObject.SetActive(true);
+            textIntroPushObject.gameObject.SetActive(false);
         }
 
     }

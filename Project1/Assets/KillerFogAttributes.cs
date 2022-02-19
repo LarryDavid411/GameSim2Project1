@@ -17,16 +17,21 @@ public class KillerFogAttributes : MonoBehaviour
             fsmManager.GetComponent<FSMController>().state = FSMController.State.KilledByFog;
         }
     }
+    
+    public float randSet = 1;
 
     // Start is called before the first frame update
     void Start()
     {
+
+   
         
+        //gameObject.GetComponent<Material>().
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Shader.SetGlobalFloat("randSet", randSet);
     }
 }

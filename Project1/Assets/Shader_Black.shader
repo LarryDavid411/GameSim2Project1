@@ -11,16 +11,27 @@ Shader "Unlit/Color"
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
+        Tags { 
+           // "RenderType"="Opaque" 
+            "RenderType"="Transparent" // Tag to inform the render pipeline of what type this is
+            "Queue"="Transparent" // changes the render order
+        }
 
         Pass
         {
+            Cull Off
+            ZWrite Off
+            //Ztest LEqual
+            Blend One One // Additive
+            //Blend DstColor Zero // Multiipy
+            
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
             #include "UnityCG.cginc"
 
+            #define TAU 6.28318503718
             
             //sampler2D _MainTex;
             //float4 _MainTex_ST;
@@ -34,16 +45,20 @@ Shader "Unlit/Color"
             
             struct MeshData
             {
-                float4 vertex : POSITION;
-                float3 normals : NORMAL;
-                float4 uv0 : TEXCOORD0;
+                float4 vertex : POSITION; // local space vertex position
+                float3 normals : NORMAL; // local space normal direction
+                // float4 tangent : TANGENT; // tangent direction (xzy) tangent sign(w)
+                // float4 color : COLOR; // vertex color
+                float4 uv0 : TEXCOORD0; // uv0 diffuse/normal map textures
+                // float4 uv1 : TEXCOORD1; // uv1 coordinates lightmap coordinates
+                // float4 uv2 : TEXCOORD2; // uv2 coordinates lightmap coordinates
+                // float4 uv3 : TEXCOORD3; // uv3 coordinates lightmap coordinates
             };
 
             struct Interpolators
             {
                 float4 vertex : SV_POSITION;
                 float3 normal : TEXCOORD0;
-
                 float2 uv : TEXCOORD1;
                 
             };
@@ -76,14 +91,19 @@ Shader "Unlit/Color"
 
                 // float t = InverseLerp(_ColorStart, _ColorEnd, i.uv.x);
                 float t = saturate( InverseLerp(_ColorStart, _ColorEnd, i.uv.x) );
-
+                float xOffset = cos(i.uv.y * TAU * 8);
+                float t1 = cos(i.uv.x * 25+ xOffset * 21) ;
+                t1 *= i.uv.y;
+                float topBottomRemover = (abs(i.normal.y) < 0.999);
+                float waves = t1 * topBottomRemover;
                 // frac
                 //t = frac(t);
-                //return t;
-                float4 outColor = lerp( _ColorA, _ColorB, t);
+                //return t1 * topBottomRemover;
+                 float4 gradient = lerp( _ColorA, _ColorB, t);
+                return  gradient;
                 //return i.uv.x;
                 
-                return outColor;
+               // return outColor;
             }
             ENDCG
             }

@@ -31,6 +31,7 @@ public class FSMController : MonoBehaviour
     public bool playerAlive;
     public Vector2 playerSpeed;
     public bool playerInPushTrigger;
+    public bool inAttackSpace;
 
     // Start is called before the first frame update
     void Start()
@@ -53,12 +54,13 @@ public class FSMController : MonoBehaviour
             {
                 // play idle animation
                 player.GetComponent<Animator>().SetBool("isWalking", false);
+                player.GetComponent<Animator>().SetBool("isPushing", false);
                 // state to walking
                 if (moveX != 0 || moveY != 0)
                 {
                     state = State.Walking;
                 }
-                if (Input.GetKey("space"))
+                if (inAttackSpace && Input.GetKey("space"))
                 {
                     state = State.Attacking;
                     player.GetComponent<Animator>().SetBool("isAttacking", true);
@@ -67,7 +69,7 @@ public class FSMController : MonoBehaviour
                 {
                     player.GetComponent<Animator>().SetBool("isAttacking", false);
                 }
-                if (playerInPushTrigger && Input.GetKeyDown(KeyCode.E))
+                if (playerInPushTrigger && Input.GetKey("space"))
                 {
                     state = State.PushingWhileIdle;
                 }
@@ -87,18 +89,19 @@ public class FSMController : MonoBehaviour
                 }
                 // play walking animation
                 player.GetComponent<Animator>().SetBool("isWalking", true);
+                player.GetComponent<Animator>().SetBool("isPushing", false);
                 // state to idle
                 if (moveX == 0 && moveY == 0)
                 {
                     state = State.Idle;
                 }
                 
-                if (Input.GetKey("space"))
+                if (inAttackSpace && Input.GetKey("space"))
                 {
                     state = State.AttackingWhileWalking;
                 }
 
-                if (playerInPushTrigger && Input.GetKeyDown(KeyCode.E))
+                if (playerInPushTrigger && Input.GetKey("space"))
                 {
                     state = State.PushingWhileWalking;
                 }
@@ -173,8 +176,15 @@ public class FSMController : MonoBehaviour
 
             case State.PushingWhileIdle:
             {
+                player.GetComponent<Animator>().SetBool("isWalking", false);
+                player.GetComponent<Animator>().SetBool("isAttacking", false);
+                player.GetComponent<Animator>().SetBool("isPushing", true);
+                if (Input.GetKeyUp("space"))
+                {
+                    state = State.Idle;
+                }
                 //player.GetComponent<Animator>().
-                if (moveX > 0)
+                if (moveX != 0)
                 {
                     state = State.PushingWhileWalking;
                 }
@@ -182,7 +192,18 @@ public class FSMController : MonoBehaviour
 
             case State.PushingWhileWalking:
             {
-                
+                player.GetComponent<Animator>().SetBool("isWalking", false);
+                player.GetComponent<Animator>().SetBool("isAttacking", false);
+                player.GetComponent<Animator>().SetBool("isPushing", true);
+                if (Input.GetKeyUp("space"))
+                {
+                    state = State.Walking;
+                }
+                //player.GetComponent<Animator>().
+                if (moveX == 0)
+                {
+                    state = State.PushingWhileIdle;
+                }
             } break;
         }
         
