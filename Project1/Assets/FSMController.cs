@@ -195,6 +195,7 @@ public class FSMController : MonoBehaviour
                 player.GetComponent<Animator>().SetBool("isWalking", false);
                 player.GetComponent<Animator>().SetBool("isAttacking", false);
                 player.GetComponent<Animator>().SetBool("isPushing", true);
+                
                 if (Input.GetKeyUp("space"))
                 {
                     state = State.Walking;
@@ -204,6 +205,8 @@ public class FSMController : MonoBehaviour
                 {
                     state = State.PushingWhileIdle;
                 }
+                moveDir.x = moveX * playerSpeed.x;
+                //moveDir.y = moveY * playerSpeed.y;
             } break;
         }
         

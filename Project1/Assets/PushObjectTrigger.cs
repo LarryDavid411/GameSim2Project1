@@ -10,6 +10,8 @@ public class PushObjectTrigger : MonoBehaviour
     public bool pushingBrick;
     public GameObject fsmManager;
     public GameObject player;
+    
+    
     private void OnTriggerStay(Collider other)
     {
         if (other.tag == "PushObjectPlayerTag")
@@ -50,6 +52,24 @@ public class PushObjectTrigger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (pushingBrick)
+        {
+            
+            if (fsmManager.GetComponent<FSMController>().state == FSMController.State.PushingWhileWalking)
+            {
+                gameObject.transform.parent.GetComponent<PushObjectAttributes>().pushingBrick = true;
+            }
+            else
+            {
+                gameObject.transform.parent.GetComponent<PushObjectAttributes>().pushingBrick = false;
+            }
+            
+            //gameObject.transform.parent.transform.position += (Vector3.right * Time.deltaTime * brickSpeed);
+        }
+        else
+        {
+            gameObject.transform.parent.GetComponent<PushObjectAttributes>().pushingBrick = false;
+        }
         
     }
 }
