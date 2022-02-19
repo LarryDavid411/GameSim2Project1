@@ -1,12 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using  UnityEngine.UI;
 
 public class SceneManager1 : MonoBehaviour
 {
     public GameObject fsmManager;
-    
+    public float timeToSwitchLevel;
+
+    private float endLevelTimer;
+    public GameObject SceneManagerLevel;
     public enum DisplayState
     {
         start,
@@ -43,6 +47,24 @@ public class SceneManager1 : MonoBehaviour
                 fsmManager.GetComponent<FSMController>().state = FSMController.State.ActivelyMoving;
             } break;
             
+        }
+
+        if (_displayState == DisplayState.end)
+        {
+            endLevelTimer += Time.deltaTime;
+        }
+
+        if (endLevelTimer > timeToSwitchLevel)
+        {
+            SceneManagerLevel.GetComponent<SceneManagerLevel>().currentLevel++;
+            _displayState = DisplayState.start;
+            // Scene currentScene = SceneManager.GetActiveScene();
+            //
+            // Debug.Log(currentScene.name);
+            // if (currentScene.name == "Scene1")
+            // {
+            //     _dis
+            // }
         }
     }
 }

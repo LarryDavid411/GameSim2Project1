@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,9 +12,15 @@ public class SceneManagerLevel : MonoBehaviour
         //currentLevel = 0;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        throw new NotImplementedException();
+    }
+
     // Update is called once per frame
     void Update()
     {
+        
         
     }
 }
