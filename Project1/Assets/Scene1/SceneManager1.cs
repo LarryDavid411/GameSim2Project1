@@ -22,6 +22,7 @@ public class SceneManager1 : MonoBehaviour
     
     public GameObject SceneManagerLevel;
     public GameObject cameraManager;
+    public float startPositionDelay;
     public Vector3[] playerPositionForLevelStarting;
     public enum DisplayState
     {
@@ -41,6 +42,7 @@ public class SceneManager1 : MonoBehaviour
         playerPositionForLevelStarting[0] = new Vector3(-15.2f, 1f, 0f);
         playerPositionForLevelStarting[1] = new Vector3(58.2f, -4.91f, 0f);
         
+        
 
 
 
@@ -54,10 +56,15 @@ public class SceneManager1 : MonoBehaviour
         {
             case DisplayState.start:
             {
+                
+                //startPositionDelay
                 if (startPlayerPosition)
                 {
                     player.GetComponent<Transform>().position = playerPositionForLevelStarting[currentLevel];
                     startPlayerPosition = false;
+                    //TODO: NEED TO SET THIS TO ONLY BE ON START WHEN THE LEVEL ACTUALLY STARTS. I"TS NOT GOIN TO END LEVEL SPCAECE
+                    
+                    
                 }
                 if (playIntroFade)
                 {

@@ -4380,9 +4380,10 @@ MonoBehaviour:
   playEndFade: 1
   currentLevel: 0
   player: {fileID: 121625368}
-  startPlayerPosition: 0
+  startPlayerPosition: 1
   SceneManagerLevel: {fileID: 1272956982}
   cameraManager: {fileID: 44463374}
+  startPositionDelay: 0
   playerPositionForLevelStarting: []
   _displayState: 0
 --- !u!1 &1282210160
