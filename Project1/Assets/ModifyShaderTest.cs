@@ -1,26 +1,23 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SceneManagerLevel : MonoBehaviour
+public class ModifyShaderTest : MonoBehaviour
 {
+    
+    
     
     // Start is called before the first frame update
     void Start()
     {
-        //currentLevel = 0;
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        throw new NotImplementedException();
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Renderer rend = GetComponent<Renderer>();
+        rend.material.SetFloat("_RandSet", 2f);
         
     }
 }

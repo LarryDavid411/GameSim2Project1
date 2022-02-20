@@ -8,6 +8,9 @@ Shader "Unlit/Color"
         _Offset ("UV Offset", Float) = 0
         _ColorStart ("Color Start", Range(0,1)) = 0
         _ColorEnd("Color End", Range(0,1)) = 1
+        _RandSet ("RandSet", Float) = 10
+        
+
     }
     SubShader
     {
@@ -39,6 +42,9 @@ Shader "Unlit/Color"
             float4 _ColorB;
             float _ColorStart;
             float _ColorEnd;
+            uniform float _TimeMod;
+            uniform float _RandSet;
+            
             
             //float _Scale;
             //float _Offset;
@@ -84,23 +90,25 @@ Shader "Unlit/Color"
             
             fixed4 frag (Interpolators i) : SV_Target
             {
+                
+                return _ColorA;
                 //return _Color;
                 //return float4(i.normal, 1);
                 //float4 outColor = lerp(_ColorA, _ColorB, i.uv.x);
                 //return float4(i.uv, 0, 1);
 
                 // float t = InverseLerp(_ColorStart, _ColorEnd, i.uv.x);
-                float t = saturate( InverseLerp(_ColorStart, _ColorEnd, i.uv.x) );
-                float xOffset = cos(i.uv.y * TAU * 8);
-                float t1 = cos(i.uv.x * 25+ xOffset * 21) ;
-                t1 *= i.uv.y;
-                float topBottomRemover = (abs(i.normal.y) < 0.999);
-                float waves = t1 * topBottomRemover;
-                // frac
-                //t = frac(t);
-                //return t1 * topBottomRemover;
-                 float4 gradient = lerp( _ColorA, _ColorB, t);
-                return  gradient;
+                // float t = saturate( InverseLerp(_ColorStart, _ColorEnd, i.uv.x) );
+                // float xOffset = cos(i.uv.y * TAU * 8);
+                // float t1 = cos(i.uv.x * 25+ xOffset * 21) ;
+                // t1 *= i.uv.y;
+                // float topBottomRemover = (abs(i.normal.y) < 0.999);
+                // float waves = t1 * topBottomRemover;
+                // // frac
+                // //t = frac(t);
+                // //return t1 * topBottomRemover;
+                //  float4 gradient = lerp( _ColorA, _ColorB, t);
+                // return  gradient;
                 //return i.uv.x;
                 
                // return outColor;

@@ -20,7 +20,7 @@ public class CameraManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int currentLevel = sceneManager.GetComponent<SceneManagerLevel>().currentLevel;
+        int currentLevel = sceneManager.GetComponent<SceneManager1>().currentLevel;
         
         if (changeLevel)
         {

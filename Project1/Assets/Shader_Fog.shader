@@ -38,6 +38,7 @@ Shader "Unlit/Shader_Fog"
             float4 _ColorA;
             float4 _ColorB;
             float _Offset;
+            uniform float _RandSet;
             
             struct MeshData
             {
@@ -73,8 +74,8 @@ Shader "Unlit/Shader_Fog"
                 // return float4 (radialCircle, 1);
 
                 //float yOffset = cos(i.uv.y * TAU* 4 + _Time.y)  ;
-                float xOffset = cos(i.uv.x +_Time.y *  2) ;
-                float yOffset = cos(i.uv.y + _Time.y *  2);
+                float xOffset = cos(i.uv.x +_Time.y *  2 * _RandSet) ;
+                float yOffset = cos(i.uv.y + _Time.y *  2 * _RandSet);
                 float2 uvCenter = i.uv * 2 - 1;
                uvCenter.x *= xOffset;
                 uvCenter.y *= yOffset;

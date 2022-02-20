@@ -2,6 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+//using Random = System.Random;
+using Random = UnityEngine.Random;
 
 public class KillerFogAttributes : MonoBehaviour
 {
@@ -9,6 +11,7 @@ public class KillerFogAttributes : MonoBehaviour
 
     public GameObject fsmManager;
     //
+    public float RandomChangeValue;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -24,14 +27,17 @@ public class KillerFogAttributes : MonoBehaviour
     void Start()
     {
 
-   
+        RandomChangeValue = Random.Range(1f, 4f);
         
+
         //gameObject.GetComponent<Material>().
     }
 
     // Update is called once per frame
     void Update()
     {
-        Shader.SetGlobalFloat("randSet", randSet);
+       // Shader.SetGlobalFloat("randSet", randSet);
+       Renderer rend = GetComponent<Renderer>();
+       rend.material.SetFloat("_RandSet", RandomChangeValue);
     }
 }

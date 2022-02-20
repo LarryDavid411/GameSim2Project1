@@ -8,6 +8,8 @@ public class SceneManager1 : MonoBehaviour
 {
     public GameObject fsmManager;
     public float timeToSwitchLevel;
+    
+    public int currentLevel;
 
     private float endLevelTimer;
     public GameObject SceneManagerLevel;
@@ -56,7 +58,7 @@ public class SceneManager1 : MonoBehaviour
 
         if (endLevelTimer > timeToSwitchLevel)
         {
-            SceneManagerLevel.GetComponent<SceneManagerLevel>().currentLevel++;
+            SceneManagerLevel.GetComponent<SceneManager1>().currentLevel++;
             _displayState = DisplayState.start;
             // Scene currentScene = SceneManager.GetActiveScene();
             //
