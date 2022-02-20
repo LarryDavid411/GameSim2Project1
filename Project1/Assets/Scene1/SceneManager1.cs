@@ -11,11 +11,18 @@ public class SceneManager1 : MonoBehaviour
     public GameObject fadeObject;
     public GameObject fadeScreen;
     public bool playIntroFade;
-    
+    public GameObject fadeToBlackScreen;
+    public bool playEndFade;
     public int currentLevel;
 
     private float endLevelTimer;
+
+    public GameObject player;
+    public bool startPlayerPosition;
+    
     public GameObject SceneManagerLevel;
+    public GameObject cameraManager;
+    public Vector3[] playerPositionForLevelStarting;
     public enum DisplayState
     {
         start,
@@ -29,6 +36,15 @@ public class SceneManager1 : MonoBehaviour
     void Start()
     {
         _displayState = DisplayState.start;
+        // player Start positions
+        playerPositionForLevelStarting = new Vector3[2];
+        playerPositionForLevelStarting[0] = new Vector3(-15.2f, 1f, 0f);
+        playerPositionForLevelStarting[1] = new Vector3(58.2f, -4.91f, 0f);
+        
+
+
+
+
     }
 
     // Update is called once per frame
@@ -38,6 +54,11 @@ public class SceneManager1 : MonoBehaviour
         {
             case DisplayState.start:
             {
+                if (startPlayerPosition)
+                {
+                    player.GetComponent<Transform>().position = playerPositionForLevelStarting[currentLevel];
+                    startPlayerPosition = false;
+                }
                 if (playIntroFade)
                 {
                     fadeScreen.GetComponent<Animation>().Play("FadeAnim");
@@ -49,12 +70,15 @@ public class SceneManager1 : MonoBehaviour
 
             case DisplayState.playing:
             {
+                fadeScreen.SetActive(false);
                 
             } break;
 
             case DisplayState.end:
             {
                 // TODO: Set up transition end
+                fadeToBlackScreen.SetActive(true);
+                startPlayerPosition = true;
                 fsmManager.GetComponent<FSMController>().state = FSMController.State.ActivelyMoving;
             } break;
             
@@ -64,13 +88,27 @@ public class SceneManager1 : MonoBehaviour
         {
             endLevelTimer += Time.deltaTime;
             fadeObject.GetComponent<FadeToWhite>().fadeOut = true;
-           
+            if (playEndFade)
+            {
+                fadeToBlackScreen.GetComponent<Animation>().Play("FadeToBlack");
+                playEndFade = false;
+
+            }
+
+            
         }
 
         if (endLevelTimer > timeToSwitchLevel)
         {
-            SceneManagerLevel.GetComponent<SceneManager1>().currentLevel++;
+            currentLevel++;
+            endLevelTimer = 0;
             _displayState = DisplayState.start;
+            playIntroFade = true;
+            playEndFade = true;
+            fadeToBlackScreen.SetActive(false);
+            fsmManager.GetComponent<FSMController>().state = FSMController.State.Idle;
+            cameraManager.GetComponent<CameraManager>().changeLevel = true;
+            startPlayerPosition = true;
             // Scene currentScene = SceneManager.GetActiveScene();
             //
             // Debug.Log(currentScene.name);
