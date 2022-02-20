@@ -8,6 +8,9 @@ public class SceneManager1 : MonoBehaviour
 {
     public GameObject fsmManager;
     public float timeToSwitchLevel;
+    public GameObject fadeObject;
+    public GameObject fadeScreen;
+    public bool playIntroFade;
     
     public int currentLevel;
 
@@ -34,7 +37,13 @@ public class SceneManager1 : MonoBehaviour
         switch (_displayState)
         {
             case DisplayState.start:
-            {   
+            {
+                if (playIntroFade)
+                {
+                    fadeScreen.GetComponent<Animation>().Play("FadeAnim");
+                    playIntroFade = false;
+                }
+               
                 // TODO: Set up transition start
             } break;
 
@@ -54,6 +63,8 @@ public class SceneManager1 : MonoBehaviour
         if (_displayState == DisplayState.end)
         {
             endLevelTimer += Time.deltaTime;
+            fadeObject.GetComponent<FadeToWhite>().fadeOut = true;
+           
         }
 
         if (endLevelTimer > timeToSwitchLevel)

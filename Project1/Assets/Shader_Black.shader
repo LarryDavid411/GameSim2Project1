@@ -9,6 +9,7 @@ Shader "Unlit/Color"
         _ColorStart ("Color Start", Range(0,1)) = 0
         _ColorEnd("Color End", Range(0,1)) = 1
         _RandSet ("RandSet", Float) = 10
+        _RedFade ("ColorRed", Color) = (0,0,0,0)
         
 
     }
@@ -44,6 +45,7 @@ Shader "Unlit/Color"
             float _ColorEnd;
             uniform float _TimeMod;
             uniform float _RandSet;
+            uniform float _redFade;
             
             
             //float _Scale;
@@ -90,8 +92,8 @@ Shader "Unlit/Color"
             
             fixed4 frag (Interpolators i) : SV_Target
             {
-                
-                return _ColorA;
+                float4 redFadeOutput = _ColorA + _redFade;
+                return redFadeOutput;
                 //return _Color;
                 //return float4(i.normal, 1);
                 //float4 outColor = lerp(_ColorA, _ColorB, i.uv.x);
