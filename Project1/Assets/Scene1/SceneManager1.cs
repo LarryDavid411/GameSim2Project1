@@ -15,7 +15,9 @@ public class SceneManager1 : MonoBehaviour
     public bool playEndFade;
     public int currentLevel;
 
-    private float endLevelTimer;
+    public float endLevelTimer;
+    private float startTimer;
+    public GameObject fogObject;
 
     public GameObject player;
     public bool startPlayerPosition;
@@ -24,6 +26,7 @@ public class SceneManager1 : MonoBehaviour
     public GameObject cameraManager;
     public float startPositionDelay;
     public Vector3[] playerPositionForLevelStarting;
+    public Vector3[] killerFogPositionForLevelStarting;
     public enum DisplayState
     {
         start,
@@ -41,8 +44,11 @@ public class SceneManager1 : MonoBehaviour
         playerPositionForLevelStarting = new Vector3[2];
         playerPositionForLevelStarting[0] = new Vector3(-15.2f, 1f, 0f);
         playerPositionForLevelStarting[1] = new Vector3(58.2f, -4.91f, 0f);
-        
-        
+
+        killerFogPositionForLevelStarting = new Vector3[2];
+        killerFogPositionForLevelStarting[0] = new Vector3(-28.1359f, 5.3909f, 0f);
+        killerFogPositionForLevelStarting[1] = new Vector3(42.3f, 0f, 0f);
+
 
 
 
@@ -60,10 +66,17 @@ public class SceneManager1 : MonoBehaviour
                 //startPositionDelay
                 if (startPlayerPosition)
                 {
-                    player.GetComponent<Transform>().position = playerPositionForLevelStarting[currentLevel];
-                    startPlayerPosition = false;
-                    //TODO: NEED TO SET THIS TO ONLY BE ON START WHEN THE LEVEL ACTUALLY STARTS. I"TS NOT GOIN TO END LEVEL SPCAECE
-                    
+                    startTimer += Time.deltaTime;
+                    if (startTimer > 3.0f)
+                    {
+                        player.GetComponent<Transform>().position = playerPositionForLevelStarting[currentLevel];
+                        fogObject.GetComponent<Transform>().position = killerFogPositionForLevelStarting[currentLevel];
+                        startPlayerPosition = false;
+                        //TODO: NEED TO SET THIS TO ONLY BE ON START WHEN THE LEVEL ACTUALLY STARTS. I"TS NOT GOIN TO END LEVEL SPCAECE
+                        startTimer = 0;
+                        
+                    }
+                  
                     
                 }
                 if (playIntroFade)
