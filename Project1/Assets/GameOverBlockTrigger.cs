@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class GameOverBlockTrigger : MonoBehaviour
 {
     private float restartTimer;
+    public float restartClock;
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
@@ -25,8 +26,6 @@ public class GameOverBlockTrigger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        restartTimer += Time.deltaTime;
-        
-        //if (restartTimer > restartClock)
+       
     }
 }
