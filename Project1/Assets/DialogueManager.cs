@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class DialogueManager : MonoBehaviour
 {
     //public GameObject gameManager;
+    private AudioSource typingAudio;
     private float textTimerForLetters;
     public GameObject levelSelector;
 
@@ -47,11 +48,13 @@ public class DialogueManager : MonoBehaviour
         nameTextAdded = "";
         displayTextSequence = -1;
         startGameTextString = "Start Game";
+        typingAudio = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        typingAudio.Play();
         if (currentLevel == 0)
         {
             switch (menuState)
@@ -77,6 +80,7 @@ public class DialogueManager : MonoBehaviour
                             textTimerForLetters = 0;
                             c = nameText[displayTextSequence];
                             nameTextAdded += c.ToString();
+                            
                         }
                     }
                     else
