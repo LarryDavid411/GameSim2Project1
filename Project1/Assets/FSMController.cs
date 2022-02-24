@@ -32,6 +32,7 @@ public class FSMController : MonoBehaviour
     public Vector2 playerSpeed;
     public bool playerInPushTrigger;
     public bool inAttackSpace;
+    public bool levelTransitioning;
 
     // Start is called before the first frame update
     void Start()
@@ -58,7 +59,10 @@ public class FSMController : MonoBehaviour
                 // state to walking
                 if (moveX != 0 || moveY != 0)
                 {
-                    state = State.Walking;
+                    if (!levelTransitioning)
+                    {
+                        state = State.Walking;
+                    }
                 }
                 if (inAttackSpace && Input.GetKey("space"))
                 {

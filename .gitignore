@@ -10,8 +10,9 @@
 [Ll]ogs/
 [Mm]emoryCaptures/
 [Ww]indowsBuild/
-Project1.zip
-
+Project1.zip	
+WindowsBuild.zip
+macBuild/
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
 
@@ -60,3 +61,4 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+Project1.zip

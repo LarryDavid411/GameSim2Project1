@@ -50,11 +50,7 @@ public class SceneManager1 : MonoBehaviour
         killerFogPositionForLevelStarting = new Vector3[10];
         killerFogPositionForLevelStarting[0] = new Vector3(-28.1359f, 5.3909f, 0f);
         killerFogPositionForLevelStarting[1] = new Vector3(42.3f, 0f, 0f);
-        killerFogPositionForLevelStarting[2] = new Vector3(70.3f, 0f, 0f);
-
-
-
-
+        killerFogPositionForLevelStarting[2] = new Vector3(85f, 0f, 0f); 
 
     }
 
@@ -65,7 +61,8 @@ public class SceneManager1 : MonoBehaviour
         {
             case DisplayState.start:
             {
-                
+                fsmManager.GetComponent<FSMController>().state = FSMController.State.Idle;
+                fsmManager.GetComponent<FSMController>().levelTransitioning = true;
                 //startPositionDelay
                 if (startPlayerPosition)
                 {
@@ -77,24 +74,21 @@ public class SceneManager1 : MonoBehaviour
                         startPlayerPosition = false;
                         //TODO: NEED TO SET THIS TO ONLY BE ON START WHEN THE LEVEL ACTUALLY STARTS. I"TS NOT GOIN TO END LEVEL SPCAECE
                         startTimer = 0;
-                        
+                        _displayState = DisplayState.playing;
                     }
-                  
-                    
                 }
                 if (playIntroFade)
                 {
                     fadeScreen.GetComponent<Animation>().Play("FadeAnim");
                     playIntroFade = false;
                 }
-               
                 // TODO: Set up transition start
             } break;
 
             case DisplayState.playing:
             {
                 fadeScreen.SetActive(false);
-                
+                fsmManager.GetComponent<FSMController>().levelTransitioning = false;
             } break;
 
             case DisplayState.end:
@@ -103,6 +97,7 @@ public class SceneManager1 : MonoBehaviour
                 fadeToBlackScreen.SetActive(true);
                 startPlayerPosition = true;
                 fsmManager.GetComponent<FSMController>().state = FSMController.State.ActivelyMoving;
+                fsmManager.GetComponent<FSMController>().levelTransitioning = true;
             } break;
             
         }
@@ -117,28 +112,29 @@ public class SceneManager1 : MonoBehaviour
                 playEndFade = false;
 
             }
-
+            if (endLevelTimer > timeToSwitchLevel)
+            {
+                currentLevel++;
+                endLevelTimer = 0;
+                _displayState = DisplayState.start;
+                playIntroFade = true;
+                playEndFade = true;
+                fadeToBlackScreen.SetActive(false);
+                fsmManager.GetComponent<FSMController>().state = FSMController.State.Idle;
+                
+                cameraManager.GetComponent<CameraManager>().changeLevel = true;
+                startPlayerPosition = true;
+                // Scene currentScene = SceneManager.GetActiveScene();
+                //
+                // Debug.Log(currentScene.name);
+                // if (currentScene.name == "Scene1")
+                // {
+                //     _dis
+                // }
+            }
             
         }
 
-        if (endLevelTimer > timeToSwitchLevel)
-        {
-            currentLevel++;
-            endLevelTimer = 0;
-            _displayState = DisplayState.start;
-            playIntroFade = true;
-            playEndFade = true;
-            fadeToBlackScreen.SetActive(false);
-            fsmManager.GetComponent<FSMController>().state = FSMController.State.Idle;
-            cameraManager.GetComponent<CameraManager>().changeLevel = true;
-            startPlayerPosition = true;
-            // Scene currentScene = SceneManager.GetActiveScene();
-            //
-            // Debug.Log(currentScene.name);
-            // if (currentScene.name == "Scene1")
-            // {
-            //     _dis
-            // }
-        }
+        
     }
 }

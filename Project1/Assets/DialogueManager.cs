@@ -80,7 +80,6 @@ public class DialogueManager : MonoBehaviour
                             textTimerForLetters = 0;
                             c = nameText[displayTextSequence];
                             nameTextAdded += c.ToString();
-                            
                         }
                     }
                     else
@@ -104,9 +103,7 @@ public class DialogueManager : MonoBehaviour
                     displayTextStartButton.text = startGameTextString;
                     levelSelector.SetActive(true);
                 } break;
-                
             }
-            
             displayText.text = nameTextAdded;
         }
     }
