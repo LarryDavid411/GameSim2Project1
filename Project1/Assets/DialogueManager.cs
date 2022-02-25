@@ -47,7 +47,7 @@ public class DialogueManager : MonoBehaviour
         nameText = "uninhabited";
         nameTextAdded = "";
         displayTextSequence = -1;
-        startGameTextString = "Start Game";
+        startGameTextString = "Click to Start Game";
         typingAudio = GetComponent<AudioSource>();
     }
 
