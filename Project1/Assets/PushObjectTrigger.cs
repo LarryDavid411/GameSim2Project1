@@ -16,7 +16,6 @@ public class PushObjectTrigger : MonoBehaviour
     {
         if (other.tag == "PushObjectPlayerTag")
         {
-            
             if (pushFromLeft != player.GetComponent<SpriteRenderer>().flipX)
             {
                 fsmManager.GetComponent<FSMController>().playerInPushTrigger = true;
@@ -26,16 +25,7 @@ public class PushObjectTrigger : MonoBehaviour
             {
                 pushingBrick = false;
             }
-            
-            // if ( (fsmManager.GetComponent<FSMController>().state ) )
-            // {
-            //     
-            // }
-            
         }
-        
-        
-        
     }
 
     private void OnTriggerExit(Collider other)
@@ -54,7 +44,6 @@ public class PushObjectTrigger : MonoBehaviour
     {
         if (pushingBrick)
         {
-            
             if (fsmManager.GetComponent<FSMController>().state == FSMController.State.PushingWhileWalking)
             {
                 gameObject.transform.parent.GetComponent<PushObjectAttributes>().pushingBrick = true;
