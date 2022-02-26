@@ -45,12 +45,15 @@ public class SceneManager1 : MonoBehaviour
         playerPositionForLevelStarting[0] = new Vector3(-15.2f, 1f, 0f);
         playerPositionForLevelStarting[1] = new Vector3(58.2f, -4.91f, 0f);
         playerPositionForLevelStarting[2] = new Vector3(107.5f, -3.3f, 0f);
+        playerPositionForLevelStarting[3] = new Vector3(174f, -3.56f, 0f);
 
 
         killerFogPositionForLevelStarting = new Vector3[10];
         killerFogPositionForLevelStarting[0] = new Vector3(-28.1359f, 5.3909f, 0f);
         killerFogPositionForLevelStarting[1] = new Vector3(42.3f, 0f, 0f);
         killerFogPositionForLevelStarting[2] = new Vector3(85f, 0f, 0f); 
+        killerFogPositionForLevelStarting[3] = new Vector3(160.47f, -0.1f, 0f); 
+
 
     }
 

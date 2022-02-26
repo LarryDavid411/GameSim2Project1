@@ -16,6 +16,7 @@ public class CameraManager : MonoBehaviour
         cameraPositionForEachScene[0] = new Vector4(0f, 1.97f, -22.14f, 10.47f);
         cameraPositionForEachScene[1] = new Vector4(75f, 1.97f, -22.14f, 10.47f);
         cameraPositionForEachScene[2] = new Vector4(125f, 1.97f, -22.14f, 10.47f);
+        cameraPositionForEachScene[3] = new Vector4(201.3f, 1.97f, -22.14f, 16.3f);
     }
     
     // Update is called once per frame
